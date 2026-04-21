@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chalk Farms — Design Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --text: #1a1a1a;
+    --text-secondary: #888780;
+    --bg: #ffffff;
+    --bg-secondary: #f5f4f0;
+    --border: rgba(26,26,26,0.15);
+    --border-secondary: rgba(26,26,26,0.25);
+    --green: #4a9e4a;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #e8e7e3; }
+
+  /* Page break label */
+  .page-break {
+    background: #1a1a1a; color: #fff;
+    padding: 1rem 2rem;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .page-break span { opacity: 0.5; font-size: 10px; }
+
+  .page-wrapper { background: #fff; max-width: 900px; margin: 0 auto 3rem; box-shadow: 0 4px 40px rgba(0,0,0,0.15); }
+
+  /* ========== SHARED COMPONENTS ========== */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 2rem; border-bottom: 0.5px solid var(--border);
+  }
+  .logo { font-size: 15px; font-weight: 500; letter-spacing: .08em; }
+  .logo span { color: var(--text-secondary); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-size: 13px; color: var(--text-secondary); text-decoration: none; }
+  .nav-links a.active { color: var(--text); font-weight: 500; }
+  .nav-cta { font-size: 12px; font-weight: 500; padding: 8px 18px; background: var(--text); color: #fff; border-radius: var(--radius-md); border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+
+  .eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px; }
+  .eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--green); display: inline-block; }
+
+  .divider { height: 0.5px; background: var(--border); }
+
+  .serif { font-family: 'Instrument Serif', serif; font-weight: 400; }
+  .muted { color: var(--text-secondary); }
+  .italic { font-style: italic; }
+
+  footer { padding: 1.5rem 2rem; border-top: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  footer .logo { font-size: 13px; }
+
+  /* ========== HOMEPAGE ========== */
+  .hp-hero { padding: 4rem 2rem 3.5rem; border-bottom: 0.5px solid var(--border); }
+  .hp-hero h1 { font-family: 'Instrument Serif', serif; font-size: 3.25rem; font-weight: 400; line-height: 1.1; margin: 0 0 1.5rem; max-width: 680px; }
+  .hp-hero-sub { font-size: 16px; line-height: 1.7; color: var(--text-secondary); max-width: 560px; margin-bottom: 2rem; }
+  .hp-hero-actions { display: flex; align-items: center; gap: 1.5rem; }
+  .btn-primary { font-size: 13px; font-weight: 500; padding: 12px 24px; background: var(--text); color: #fff; border-radius: var(--radius-md); border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .btn-ghost { font-size: 13px; color: var(--text-secondary); background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+
+  .ticker-wrap { border-bottom: 0.5px solid var(--border); padding: 1rem 0; }
+  .ticker-label { text-align: center; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: .75rem; }
+  .ticker-track { display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap; justify-content: center; padding: 0 2rem; }
+  .ticker-item { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+  .ticker-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border-secondary); }
+
+  .proof-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-bottom: 0.5px solid var(--border); }
+  .proof-cell { background: #fff; padding: 2rem; }
+  .proof-num { font-family: 'Instrument Serif', serif; font-size: 2.5rem; font-weight: 400; line-height: 1; margin-bottom: 8px; }
+  .proof-label { font-size: 13px; color: var(--text-secondary); line-height: 1.45; max-width: 180px; }
+
+  .section { padding: 3.5rem 2rem; border-bottom: 0.5px solid var(--border); }
+  .section-eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-secondary); margin: 0 0 1rem; }
+  .section-title { font-family: 'Instrument Serif', serif; font-size: 2.5rem; font-weight: 400; line-height: 1.2; margin-bottom: 2.5rem; max-width: 560px; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .service-card { background: #fff; padding: 1.5rem; }
+  .service-num { font-size: 11px; color: var(--text-secondary); margin-bottom: .75rem; font-weight: 500; }
+  .service-name { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+  .service-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 1rem; }
+  .service-price { font-size: 12px; color: var(--text-secondary); border-top: 0.5px solid var(--border); padding-top: .75rem; }
+  .service-price strong { color: var(--text); font-weight: 500; }
+
+  .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .work-card { border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; }
+  .work-client { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: .75rem; }
+  .work-title { font-family: 'Instrument Serif', serif; font-size: 1.35rem; font-weight: 400; line-height: 1.35; margin-bottom: 1rem; }
+  .work-stat-num { font-family: 'Instrument Serif', serif; font-size: 2rem; font-weight: 400; }
+  .work-stat-label { font-size: 12px; color: var(--text-secondary); }
+  .tag { display: inline-block; font-size: 11px; padding: 3px 9px; border-radius: 20px; border: 0.5px solid var(--border-secondary); color: var(--text-secondary); margin: 3px 4px 0 0; }
+  .work-arrow { font-size: 13px; color: var(--text-secondary); margin-top: 1rem; }
+
+  .model-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .model-text { font-size: 14px; line-height: 1.75; color: var(--text-secondary); }
+  .model-text p { margin-bottom: 1rem; }
+  .pillars { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .pillar { background: #fff; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem; }
+  .pillar-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .pillar-text { font-size: 14px; font-weight: 500; }
+
+  .gh-teaser { background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 2.5rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+  .gh-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: .75rem; }
+  .gh-title { font-family: 'Instrument Serif', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: .75rem; }
+  .gh-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+  .btn-ghost-border { font-size: 13px; font-weight: 500; padding: 12px 22px; background: none; border: 0.5px solid var(--border-secondary); border-radius: var(--radius-md); cursor: pointer; font-family: 'DM Sans', sans-serif; white-space: nowrap; }
+
+  .cta-strip { padding: 4rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; border-bottom: 0.5px solid var(--border); }
+  .cta-headline { font-family: 'Instrument Serif', serif; font-size: 2.25rem; font-weight: 400; max-width: 460px; line-height: 1.25; }
+  .cta-note { font-size: 12px; color: var(--text-secondary); margin-top: 8px; }
+
+  /* ========== SERVICES ========== */
+  .svc-block { display: grid; grid-template-columns: 1fr 1.6fr; border-bottom: 0.5px solid var(--border); }
+  .svc-left { padding: 2.5rem 2rem; border-right: 0.5px solid var(--border); }
+  .svc-right { padding: 2.5rem 2rem; }
+  .svc-num { font-size: 11px; color: var(--text-secondary); font-weight: 500; margin-bottom: .75rem; letter-spacing: .06em; }
+  .svc-name { font-family: 'Instrument Serif', serif; font-size: 1.5rem; font-weight: 400; line-height: 1.2; margin-bottom: 1rem; }
+  .svc-price { font-size: 13px; font-weight: 500; margin-bottom: 1rem; display: block; }
+  .svc-price span { color: var(--text-secondary); font-weight: 400; font-size: 12px; }
+  .svc-icp { font-size: 12px; color: var(--text-secondary); border-top: 0.5px solid var(--border); padding-top: 1rem; margin-top: 1rem; }
+  .svc-icp strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text); margin-bottom: 4px; font-weight: 500; }
+  .svc-desc { font-size: 15px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 1.5rem; }
+  .includes-label { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-secondary); margin-bottom: .75rem; }
+  .includes-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+  .include-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.45; }
+  .include-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); flex-shrink: 0; margin-top: 6px; }
+
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2rem; }
+  .price-card { background: #fff; padding: 1.75rem 1.5rem; }
+  .price-card.featured { background: var(--bg-secondary); }
+  .price-name { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .price-amount { font-family: 'Instrument Serif', serif; font-size: 2rem; font-weight: 400; line-height: 1; margin-bottom: 4px; }
+  .price-cadence { font-size: 12px; color: var(--text-secondary); margin-bottom: 1.25rem; }
+  .price-divider { height: 0.5px; background: var(--border); margin-bottom: 1.25rem; }
+  .price-items { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.25rem; }
+  .price-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+  .price-check { color: var(--green); font-size: 13px; flex-shrink: 0; font-weight: 500; }
+  .price-cta { width: 100%; font-size: 12px; font-weight: 500; padding: 9px 0; background: none; border: 0.5px solid var(--border-secondary); border-radius: var(--radius-md); cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .price-cta.primary { background: var(--text); color: #fff; border-color: transparent; }
+
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2.5rem; }
+  .faq-q { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+  .faq-a { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* ========== ABOUT ========== */
+  .about-manifesto { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; padding: 3rem 2rem; border-bottom: 0.5px solid var(--border); }
+  .manifesto-body { font-size: 15px; line-height: 1.8; color: var(--text-secondary); }
+  .manifesto-body p { margin-bottom: 1.25rem; }
+  .manifesto-body strong { color: var(--text); font-weight: 500; }
+  .beliefs { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; align-self: start; }
+  .belief { background: #fff; padding: 1.25rem 1.5rem; display: flex; gap: 1rem; }
+  .belief-num { font-size: 11px; color: var(--text-secondary); font-weight: 500; flex-shrink: 0; padding-top: 2px; min-width: 20px; }
+  .belief-text { font-size: 14px; line-height: 1.55; }
+  .belief-sub { color: var(--text-secondary); font-size: 12px; display: block; margin-top: 3px; }
+
+  .how-header { padding: 2.5rem 2rem 0; }
+  .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-top: 0.5px solid var(--border); }
+  .how-step { background: #fff; padding: 2rem; }
+  .step-num { font-size: 11px; font-weight: 500; color: var(--text-secondary); letter-spacing: .06em; margin-bottom: 1rem; }
+  .step-title { font-size: 15px; font-weight: 500; margin-bottom: .75rem; }
+  .step-desc { font-size: 13px; line-height: 1.65; color: var(--text-secondary); }
+
+  .beliefs-section { padding: 3rem 2rem; border-bottom: 0.5px solid var(--border); }
+  .beliefs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .belief-card { background: #fff; padding: 1.5rem 1.75rem; display: flex; gap: 1rem; }
+  .belief-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; margin-top: 5px; }
+  .belief-title { font-size: 14px; font-weight: 500; margin-bottom: 5px; }
+  .belief-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+  .who-section { padding: 3rem 2rem; border-bottom: 0.5px solid var(--border); }
+  .who-sub { font-size: 15px; color: var(--text-secondary); margin-bottom: 2rem; max-width: 560px; line-height: 1.7; }
+  .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .who-card { background: #fff; padding: 1.5rem; }
+  .who-icon { width: 32px; height: 32px; border-radius: var(--radius-md); background: var(--bg-secondary); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+  .who-name { font-size: 13px; font-weight: 500; margin-bottom: 5px; }
+  .who-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* ========== BOOK A CALL ========== */
+  .book-wrap { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 0.5px solid var(--border); }
+  .book-left { padding: 3.5rem 2.5rem; border-right: 0.5px solid var(--border); }
+  .book-right { padding: 3.5rem 2.5rem; background: var(--bg-secondary); }
+  .book-left h1 { font-family: 'Instrument Serif', serif; font-size: 2.5rem; font-weight: 400; line-height: 1.15; margin: 0 0 1rem; }
+  .book-sub { font-size: 15px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 2rem; max-width: 400px; }
+  .expect { border-top: 0.5px solid var(--border); padding-top: 1.5rem; }
+  .expect-label { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-secondary); margin-bottom: 1rem; }
+  .expect-list { display: flex; flex-direction: column; gap: 10px; }
+  .expect-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .expect-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); flex-shrink: 0; margin-top: 5px; }
+  .form-title { font-size: 13px; font-weight: 500; margin-bottom: 1.5rem; }
+  .field { margin-bottom: 1.25rem; }
+  .field-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .field label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-secondary); }
+  .optional { font-size: 11px; color: var(--text-secondary); font-style: italic; opacity: .7; }
+  .field input, .field textarea { width: 100%; padding: 10px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif; background: #fff; border: 0.5px solid var(--border-secondary); border-radius: var(--radius-md); color: var(--text); }
+  .field textarea { min-height: 90px; resize: vertical; line-height: 1.6; }
+  .form-submit { width: 100%; padding: 13px; background: var(--text); color: #fff; border: none; border-radius: var(--radius-md); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; margin-top: .5rem; }
+  .form-note { font-size: 12px; color: var(--text-secondary); text-align: center; margin-top: 1rem; line-height: 1.5; }
+
+  /* ========== GREENHOUSE ========== */
+  .gh-hero { padding: 3.5rem 2rem; border-bottom: 0.5px solid var(--border); }
+  .gh-hero h1 { font-family: 'Instrument Serif', serif; font-size: 3rem; font-weight: 400; line-height: 1.15; margin: 0 0 1rem; max-width: 600px; }
+  .gh-sub { font-size: 15px; color: var(--text-secondary); line-height: 1.7; max-width: 520px; }
+  .cats { padding: .75rem 2rem; border-bottom: 0.5px solid var(--border); display: flex; gap: .5rem; flex-wrap: wrap; }
+  .cat { font-size: 12px; padding: 5px 14px; border-radius: 20px; border: 0.5px solid var(--border-secondary); color: var(--text-secondary); background: none; font-family: 'DM Sans', sans-serif; }
+  .cat.active { background: var(--text); color: #fff; border-color: transparent; }
+  .featured-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 1px; background: var(--border); border-bottom: 0.5px solid var(--border); }
+  .featured-main { background: #fff; padding: 2.5rem 2rem; }
+  .featured-side { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+  .featured-secondary { background: #fff; padding: 1.75rem 2rem; flex: 1; }
+  .article-tag { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--green); font-weight: 500; margin-bottom: .75rem; }
+  .article-title-lg { font-family: 'Instrument Serif', serif; font-size: 1.9rem; font-weight: 400; line-height: 1.25; margin-bottom: .75rem; }
+  .article-title-md { font-family: 'Instrument Serif', serif; font-size: 1.2rem; font-weight: 400; line-height: 1.25; margin-bottom: .75rem; }
+  .article-title-sm { font-family: 'Instrument Serif', serif; font-size: 1.05rem; font-weight: 400; line-height: 1.25; margin-bottom: .75rem; }
+  .article-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 1rem; }
+  .article-meta { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--text-secondary); }
+  .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border-secondary); }
+  .grid-section { padding: 2.5rem 2rem; border-bottom: 0.5px solid var(--border); }
+  .grid-label { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-secondary); margin-bottom: 1.5rem; }
+  .article-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .grid-card { background: #fff; padding: 1.5rem; }
+  .nl-section { padding: 3rem 2rem; border-bottom: 0.5px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .nl-title { font-family: 'Instrument Serif', serif; font-size: 1.75rem; font-weight: 400; margin-bottom: .75rem; }
+  .nl-sub { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+  .nl-form { display: flex; gap: 10px; margin-top: 1.5rem; }
+  .nl-input { flex: 1; padding: 11px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif; background: #fff; border: 0.5px solid var(--border-secondary); border-radius: var(--radius-md); }
+  .nl-btn { padding: 11px 22px; background: var(--text); color: #fff; border: none; border-radius: var(--radius-md); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; white-space: nowrap; }
+  .nl-note { font-size: 11px; color: var(--text-secondary); margin-top: .75rem; }
+
+  /* ========== CASE STUDY ========== */
+  .cs-eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 12px; }
+  .cs-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--green); }
+  .cs-hero { padding: 2.5rem 2rem 2rem; }
+  .cs-headline { font-family: 'Instrument Serif', serif; font-size: 2.75rem; font-weight: 400; line-height: 1.15; margin: 0 0 1.5rem; max-width: 680px; }
+  .cs-headline em { font-style: italic; color: var(--text-secondary); }
+  .cs-about { background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; display: flex; gap: 1.25rem; }
+  .cs-about-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-secondary); flex-shrink: 0; padding-top: 2px; min-width: 52px; }
+  .cs-about-text { font-size: 14px; line-height: 1.65; color: var(--text-secondary); }
+  .cs-meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+  .cs-meta-item label { display: block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px; }
+  .cs-meta-item span { font-size: 14px; font-weight: 500; }
+  .cs-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin: 2rem 0; }
+  .cs-stat { background: #fff; padding: 1.75rem 1.5rem; }
+  .cs-stat-num { font-family: 'Instrument Serif', serif; font-size: 2.75rem; font-weight: 400; line-height: 1; margin-bottom: 8px; }
+  .cs-stat-label { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+  .cs-section-title { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-secondary); margin: 2rem 0 1rem; }
+  .cs-body { font-size: 16px; line-height: 1.75; color: var(--text); max-width: 640px; margin-bottom: 1.25rem; }
+  .cs-channel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 1.5rem 0; }
+  .cs-channel { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 1.25rem; }
+  .cs-channel-name { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .cs-channel-role { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+  .cs-chart-wrap { margin: 2rem 0; border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .cs-chart-header { padding: 1rem 1.25rem .75rem; border-bottom: 0.5px solid var(--border); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; }
+  .cs-chart-header strong { font-size: 14px; font-weight: 500; color: var(--text); }
+  .cs-chart-inner { padding: 1.25rem; }
+  .cs-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .cs-bar-label { font-size: 11px; color: var(--text-secondary); width: 56px; flex-shrink: 0; text-align: right; }
+  .cs-bar-track { flex: 1; height: 28px; background: var(--bg-secondary); border-radius: 4px; overflow: hidden; }
+  .cs-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 500; }
+  .cs-bar-fill.before { background: var(--bg-secondary); color: var(--text-secondary); border: 0.5px solid var(--border-secondary); }
+  .cs-bar-fill.after { background: #1a2e1a; color: #a8d4a8; }
+  .cs-annotation { font-size: 11px; color: var(--text-secondary); font-style: italic; margin-top: .5rem; }
+  .cs-inflection { border-left: 2px solid var(--green); padding-left: 1.25rem; margin: 1.5rem 0; }
+  .cs-inflection-text { font-family: 'Instrument Serif', serif; font-size: 1.35rem; line-height: 1.5; margin-bottom: 6px; }
+  .cs-inflection-attr { font-size: 12px; color: var(--text-secondary); }
+  .cs-mini-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 1.5rem 0; }
+  .cs-mini-stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 1rem 1.25rem; }
+  .cs-mini-num { font-family: 'Instrument Serif', serif; font-size: 1.75rem; font-weight: 400; margin-bottom: 4px; }
+  .cs-mini-label { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+  .cs-cta-strip { display: flex; align-items: center; justify-content: space-between; border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem 1.75rem; margin-top: 3rem; flex-wrap: wrap; gap: 1rem; }
+  .cs-cta-text { font-family: 'Instrument Serif', serif; font-size: 1.35rem; }
+  .cs-section { padding: 0 2rem 2rem; }
+</style>
+</head>
+<body>
+
+<!-- ===================== PAGE 1: HOMEPAGE ===================== -->
+<div class="page-break">
+  <span>Chalk Farms — Design Reference</span>
+  <span>PAGE 01 — Homepage</span>
+</div>
+<div class="page-wrapper">
+  <nav class="nav">
+    <div class="logo">CHALK<span>&nbsp;FARMS</span></div>
+    <div class="nav-links">
+      <a href="#" class="active">Work</a>
+      <a href="#">Services</a>
+      <a href="#">About</a>
+      <a href="#">Greenhouse</a>
+      <a href="#">Pricing</a>
+    </div>
+    <button class="nav-cta">Book a call</button>
+  </nav>
+  <div class="hp-hero">
+    <div class="eyebrow">Growth marketing agency</div>
+    <h1 class="serif">Full-funnel growth marketing for <span class="italic muted">challenger brands.</span></h1>
+    <p class="hp-hero-sub">Chalk Farms builds the marketing engines that take growth-stage companies from stalled to scalable -- across paid media, performance creative, lifecycle marketing, and conversion strategy.</p>
+    <div class="hp-hero-actions">
+      <button class="btn-primary">See our services</button>
+      <button class="btn-ghost">View our work →</button>
+    </div>
+  </div>
+  <div class="ticker-wrap">
+    <div class="ticker-label">Growth-stage brands that chose to scale differently</div>
+    <div class="ticker-track">
+      <span class="ticker-item">FELFEL</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Benchmark Vehicles</span><span class="ticker-dot"></span>
+      <span class="ticker-item">JVP Labs</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Jennifer Hollister Group</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Joann Hoffman</span>
+    </div>
+  </div>
+  <div class="proof-bar">
+    <div class="proof-cell"><div class="proof-num serif">$30M+</div><div class="proof-label">In ad spend managed across growth-stage brands</div></div>
+    <div class="proof-cell"><div class="proof-num serif">$20M+</div><div class="proof-label">In attributable revenue driven across client engagements</div></div>
+    <div class="proof-cell"><div class="proof-num serif">45+</div><div class="proof-label">Companies taken from stalled growth to scalable pipeline</div></div>
+  </div>
+  <div class="section">
+    <div class="section-eyebrow">Services</div>
+    <div class="section-title serif">Everything you need to grow. <span class="italic muted">Nothing you don't.</span></div>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-num">01</div><div class="service-name">Paid media management</div><div class="service-desc">LinkedIn, Google, and Meta built for pipeline -- not just impressions.</div><div class="service-price">From <strong>$6,000/mo</strong></div></div>
+      <div class="service-card"><div class="service-num">02</div><div class="service-name">Performance creative</div><div class="service-desc">Creative built to convert, not just to look good.</div><div class="service-price">From <strong>$5,000/mo</strong></div></div>
+      <div class="service-card"><div class="service-num">03</div><div class="service-name">Lifecycle and retention</div><div class="service-desc">From first impression to closed deal -- and everything after.</div><div class="service-price">From <strong>$5,000/mo</strong></div></div>
+      <div class="service-card"><div class="service-num">04</div><div class="service-name">Conversion architecture</div><div class="service-desc">Your website should be your best salesperson. We rebuild it to perform.</div><div class="service-price">From <strong>$40,000</strong></div></div>
+      <div class="service-card"><div class="service-num">05</div><div class="service-name">Growth strategy</div><div class="service-desc">ICP, channel strategy, and a 90-day roadmap. The plan before the spend.</div><div class="service-price">From <strong>$8,000</strong></div></div>
+      <div class="service-card"><div class="service-num">06</div><div class="service-name">Greenhouse</div><div class="service-desc">Our free editorial hub for growth-stage founders and marketing leads.</div><div class="service-price"><strong>Free</strong></div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-eyebrow">Work</div>
+    <div class="section-title serif">Results that <span class="italic muted">speak plainly.</span></div>
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="work-client">FELFEL &nbsp;·&nbsp; Food tech / B2B</div>
+        <div class="work-title serif">From below-goal pipeline to 2.5x target in 60 days.</div>
+        <div style="display:flex;align-items:baseline;gap:8px"><div class="work-stat-num serif">103</div><div class="work-stat-label">SQLs in March 2026 vs. 40/month goal</div></div>
+        <div style="margin-top:1rem"><span class="tag">LinkedIn</span><span class="tag">Meta</span><span class="tag">Google</span><span class="tag">HubSpot</span></div>
+        <div class="work-arrow">Read case study →</div>
+      </div>
+      <div class="work-card">
+        <div class="work-client">Benchmark Vehicles &nbsp;·&nbsp; Premium B2C</div>
+        <div class="work-title serif">Built from zero to demand they couldn't keep up with.</div>
+        <div style="display:flex;align-items:baseline;gap:8px"><div class="work-stat-num serif">2x</div><div class="work-stat-label">Returning customers. Media paused -- pipeline full.</div></div>
+        <div style="margin-top:1rem"><span class="tag">YouTube</span><span class="tag">Google</span><span class="tag">PMax</span><span class="tag">Meta</span></div>
+        <div class="work-arrow">Read case study →</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-eyebrow">The model</div>
+    <div class="section-title serif">Strategy first. <span class="italic muted">Performance always.</span></div>
+    <div class="model-grid">
+      <div class="model-text">
+        <p>Most growth agencies are execution shops. They take your brief, run your ads, and report back. What they can't do is tell you why your ICP is wrong, why your funnel is leaking, or why you're spending on the wrong channel.</p>
+        <p>Chalk Farms was built by operators who've done the work inside startups and lean teams -- where there's no room for experiments that don't move the needle. Strategy first, performance always.</p>
+        <p>AI is embedded in how we work, not what we sell. We move faster and cost less than an in-house team.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><div class="pillar-dot"></div><div class="pillar-text">Audience and ICP strategy</div></div>
+        <div class="pillar"><div class="pillar-dot"></div><div class="pillar-text">Channel architecture</div></div>
+        <div class="pillar"><div class="pillar-dot"></div><div class="pillar-text">Creative built to convert</div></div>
+        <div class="pillar"><div class="pillar-dot"></div><div class="pillar-text">Full-funnel measurement</div></div>
+        <div class="pillar"><div class="pillar-dot"></div><div class="pillar-text">AI-enabled delivery</div></div>
+        <div class="pillar"><div class="pillar-dot"></div><div class="pillar-text">Transparent reporting</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="gh-teaser">
+      <div><div class="gh-label">Greenhouse</div><div class="gh-title serif">Where growth-stage thinking gets published.</div><div class="gh-desc">Frameworks, channel playbooks, and honest POVs for founders and marketing leads. No fluff, no gatekeeping.</div></div>
+      <button class="btn-ghost-border">Explore Greenhouse →</button>
+    </div>
+  </div>
+  <div class="cta-strip">
+    <div class="cta-headline serif">Ready to build a pipeline that <span class="italic muted">actually scales?</span></div>
+    <div><button class="btn-primary">Book a call</button><div class="cta-note">No commitment. 30 minutes. We'll tell you what we'd do differently.</div></div>
+  </div>
+  <footer><div class="logo">CHALK FARMS</div><div style="font-size:12px;color:var(--text-secondary)">© 2026 Chalk Farms</div></footer>
+</div>
+
+<!-- ===================== PAGE 2: SERVICES + PRICING ===================== -->
+<div class="page-break"><span>Chalk Farms — Design Reference</span><span>PAGE 02 — Services + Pricing</span></div>
+<div class="page-wrapper">
+  <nav class="nav"><div class="logo">CHALK<span>&nbsp;FARMS</span></div><div class="nav-links"><a href="#">Work</a><a href="#" class="active">Services</a><a href="#">About</a><a href="#">Greenhouse</a><a href="#" class="active">Pricing</a></div><button class="nav-cta">Book a call</button></nav>
+  <div style="padding:4rem 2rem 3rem;border-bottom:0.5px solid var(--border)">
+    <div class="eyebrow">Services</div>
+    <h1 class="serif" style="font-size:3.25rem;font-weight:400;line-height:1.15;margin:0 0 1rem">The full stack for <span class="italic muted">companies ready to scale.</span></h1>
+    <p style="font-size:16px;line-height:1.7;color:var(--text-secondary);max-width:560px">Six service lines built around the complete growth journey. Engage one or build a full program. All of it run by senior operators, not account managers.</p>
+  </div>
+  <div class="svc-block">
+    <div class="svc-left"><div class="svc-num">01</div><div class="svc-name serif">Paid media management</div><span class="svc-price">$6,000 <span>/ month starting</span></span><div class="svc-icp"><strong>Best for</strong>Growth-stage companies with a pipeline or lead volume problem. B2B and B2C.</div></div>
+    <div class="svc-right"><p class="svc-desc">LinkedIn, Google, and Meta built for pipeline. We assign each channel a job and optimize against business outcomes, not platform vanity metrics.</p><div class="includes-label">What's included</div><div class="includes-list"><div class="include-item"><div class="include-dot"></div>Channel strategy and audience architecture</div><div class="include-item"><div class="include-dot"></div>Campaign build, launch, and ongoing management</div><div class="include-item"><div class="include-dot"></div>Weekly reporting with plain-language insights</div><div class="include-item"><div class="include-dot"></div>GA4, GTM, and CRM tracking setup and maintenance</div></div></div>
+  </div>
+  <div class="svc-block">
+    <div class="svc-left"><div class="svc-num">02</div><div class="svc-name serif">Performance creative</div><span class="svc-price">$5,000 <span>/ month starting</span></span><div class="svc-icp"><strong>Best for</strong>Companies with stale creative or launching without an in-house team.</div></div>
+    <div class="svc-right"><p class="svc-desc">Creative built to convert, not just to look good. Designed around your buyer's psychology -- whether B2B decision-maker or premium consumer.</p><div class="includes-label">What's included</div><div class="includes-list"><div class="include-item"><div class="include-dot"></div>Monthly creative strategy and concepting</div><div class="include-item"><div class="include-dot"></div>Ad creative production (static, video, carousel)</div><div class="include-item"><div class="include-dot"></div>A/B testing structure and creative iteration</div></div></div>
+  </div>
+  <div class="svc-block">
+    <div class="svc-left"><div class="svc-num">03</div><div class="svc-name serif">Lifecycle and retention</div><span class="svc-price">$5,000 <span>/ month starting</span></span><div class="svc-icp"><strong>Best for</strong>B2B companies with a leaky funnel or B2C brands needing to improve LTV.</div></div>
+    <div class="svc-right"><p class="svc-desc">From first impression to closed deal -- and everything after. HubSpot, email, and nurture sequences that keep your pipeline moving.</p><div class="includes-label">What's included</div><div class="includes-list"><div class="include-item"><div class="include-dot"></div>HubSpot setup, audit, or optimization</div><div class="include-item"><div class="include-dot"></div>Lead scoring and MQL-to-SQL pipeline design</div><div class="include-item"><div class="include-dot"></div>Email nurture sequence strategy and copywriting</div></div></div>
+  </div>
+  <div class="svc-block">
+    <div class="svc-left"><div class="svc-num">04</div><div class="svc-name serif">Conversion architecture</div><span class="svc-price">$40,000 <span>starting / project</span></span><div class="svc-icp"><strong>Best for</strong>Companies with traffic that isn't converting or a website that hasn't been optimized.</div></div>
+    <div class="svc-right"><p class="svc-desc">Your website is your best salesperson -- or it should be. We redesign and optimize conversion experiences from first click to form submit or purchase.</p><div class="includes-label">What's included</div><div class="includes-list"><div class="include-item"><div class="include-dot"></div>Conversion audit and funnel analysis</div><div class="include-item"><div class="include-dot"></div>Website redesign or landing page build</div><div class="include-item"><div class="include-dot"></div>Messaging hierarchy and positioning copy</div></div></div>
+  </div>
+  <div class="svc-block">
+    <div class="svc-left"><div class="svc-num">05</div><div class="svc-name serif">Growth strategy</div><span class="svc-price">$8,000 <span>starting / project</span></span><div class="svc-icp"><strong>Best for</strong>Founders who know they need to grow but aren't sure where to start.</div></div>
+    <div class="svc-right"><p class="svc-desc">The plan before the spend. ICP definition, channel selection, competitive positioning, and a 90-day roadmap your team can execute against.</p><div class="includes-label">What's included</div><div class="includes-list"><div class="include-item"><div class="include-dot"></div>ICP definition and buyer journey mapping</div><div class="include-item"><div class="include-dot"></div>Channel strategy and budget allocation framework</div><div class="include-item"><div class="include-dot"></div>90-day growth roadmap with prioritized actions</div></div></div>
+  </div>
+  <div style="padding:3.5rem 2rem;border-top:0.5px solid var(--border)">
+    <div class="eyebrow">Pricing</div>
+    <h2 class="serif" style="font-size:2.75rem;font-weight:400;margin-bottom:1rem">Transparent pricing. <span class="italic muted">No surprises.</span></h2>
+    <p style="font-size:15px;color:var(--text-secondary);margin-bottom:2rem;max-width:520px;line-height:1.7">Every engagement is scoped to your actual situation. The numbers below are honest starting points -- not bait-and-switch minimums.</p>
+    <div class="pricing-grid">
+      <div class="price-card"><div class="price-name">Paid media management</div><div class="price-amount serif">$6,000</div><div class="price-cadence">per month, starting</div><div class="price-divider"></div><div class="price-items"><div class="price-item"><span class="price-check">+</span>Up to 2 channels</div><div class="price-item"><span class="price-check">+</span>Campaign management</div><div class="price-item"><span class="price-check">+</span>Weekly reporting</div></div><button class="price-cta">Book a call</button></div>
+      <div class="price-card"><div class="price-name">Performance creative</div><div class="price-amount serif">$5,000</div><div class="price-cadence">per month, starting</div><div class="price-divider"></div><div class="price-items"><div class="price-item"><span class="price-check">+</span>Monthly creative strategy</div><div class="price-item"><span class="price-check">+</span>Ad production</div><div class="price-item"><span class="price-check">+</span>A/B testing</div></div><button class="price-cta">Book a call</button></div>
+      <div class="price-card featured"><div class="price-name">Lifecycle and retention</div><div class="price-amount serif">$5,000</div><div class="price-cadence">per month, starting</div><div class="price-divider"></div><div class="price-items"><div class="price-item"><span class="price-check">+</span>HubSpot setup</div><div class="price-item"><span class="price-check">+</span>Email nurture</div><div class="price-item"><span class="price-check">+</span>Lead scoring</div></div><button class="price-cta">Book a call</button></div>
+      <div class="price-card"><div class="price-name">Conversion architecture</div><div class="price-amount serif">$40,000</div><div class="price-cadence">project, starting</div><div class="price-divider"></div><div class="price-items"><div class="price-item"><span class="price-check">+</span>Conversion audit</div><div class="price-item"><span class="price-check">+</span>Website build</div><div class="price-item"><span class="price-check">+</span>Positioning copy</div></div><button class="price-cta">Book a call</button></div>
+      <div class="price-card"><div class="price-name">Growth strategy</div><div class="price-amount serif">$8,000</div><div class="price-cadence">project, starting</div><div class="price-divider"></div><div class="price-items"><div class="price-item"><span class="price-check">+</span>ICP and buyer journey</div><div class="price-item"><span class="price-check">+</span>Channel strategy</div><div class="price-item"><span class="price-check">+</span>90-day roadmap</div></div><button class="price-cta primary">Book a call</button></div>
+      <div class="price-card"><div class="price-name">Greenhouse</div><div class="price-amount serif">Free</div><div class="price-cadence">always</div><div class="price-divider"></div><div class="price-items"><div class="price-item"><span class="price-check">+</span>Frameworks and playbooks</div><div class="price-item"><span class="price-check">+</span>Channel POVs</div><div class="price-item"><span class="price-check">+</span>No email required</div></div><button class="price-cta">Explore →</button></div>
+    </div>
+    <div style="margin-top:2.5rem">
+      <h3 class="serif" style="font-size:1.5rem;font-weight:400;margin-bottom:2rem">Pricing questions, answered plainly.</h3>
+      <div class="faq-grid">
+        <div><div class="faq-q">Do you require a minimum contract term?</div><div class="faq-a">Retainer engagements start with a 3-month minimum. After that, month-to-month.</div></div>
+        <div><div class="faq-q">What's not included in the retainer?</div><div class="faq-a">Ad spend is separate. Media spend goes directly to the platforms, not through us.</div></div>
+        <div><div class="faq-q">Can I engage multiple service lines?</div><div class="faq-a">Yes. Paid media and performance creative are most commonly paired.</div></div>
+        <div><div class="faq-q">How quickly can we get started?</div><div class="faq-a">Most engagements launch within two weeks of contract signing.</div></div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="logo">CHALK FARMS</div><div style="font-size:12px;color:var(--text-secondary)">© 2026 Chalk Farms</div></footer>
+</div>
+
+<!-- ===================== PAGE 3: ABOUT ===================== -->
+<div class="page-break"><span>Chalk Farms — Design Reference</span><span>PAGE 03 — About</span></div>
+<div class="page-wrapper">
+  <nav class="nav"><div class="logo">CHALK<span>&nbsp;FARMS</span></div><div class="nav-links"><a href="#">Work</a><a href="#">Services</a><a href="#" class="active">About</a><a href="#">Greenhouse</a><a href="#">Pricing</a></div><button class="nav-cta">Book a call</button></nav>
+  <div style="padding:4rem 2rem 3.5rem;border-bottom:0.5px solid var(--border)">
+    <div class="eyebrow">About</div>
+    <h1 class="serif" style="font-size:3.25rem;font-weight:400;line-height:1.1;margin:0">We build growth engines for <span class="italic muted">companies that can't afford to get it wrong.</span></h1>
+  </div>
+  <div style="padding:1.5rem 2rem;border-bottom:0.5px solid var(--border)">
+    <div class="eyebrow">Our thesis</div>
+    <div style="display:grid;grid-template-columns:1fr 1.75fr;gap:3rem;align-items:start">
+      <div class="serif" style="font-size:1.75rem;line-height:1.2">Growth marketing is broken <span class="italic muted">for the middle.</span></div>
+      <div class="manifesto-body"><p>The holding companies are built for enterprises. The freelance economy is built for one-off projects. Most performance agencies are built for DTC brands that can pour money into Meta and measure ROAS in real time.</p><p>That leaves an entire tier of companies -- growth-stage, $2M to $50M -- either overpaying for an agency that treats them like a B-level client, or piecing together freelancers who don't talk to each other.</p><p><strong>Chalk Farms was built for that gap.</strong> We bring the accountability of a performance shop and the strategic thinking of an integrated agency -- without the overhead, the layers, or the account managers who've never run a campaign themselves.</p></div>
+    </div>
+  </div>
+  <div style="border-bottom:0.5px solid var(--border)">
+    <div class="how-header"><div class="eyebrow">How we work</div><h2 class="serif" style="font-size:2.5rem;font-weight:400;margin-bottom:2rem">A process built for <span class="italic muted">speed and accountability.</span></h2></div>
+    <div class="how-steps">
+      <div class="how-step"><div class="step-num">Step 01</div><div class="step-title">Diagnose before we prescribe</div><div class="step-desc">Every engagement starts with an audit -- your channels, your funnel, your tracking, your ICP. We don't touch a campaign until we understand what's broken.</div></div>
+      <div class="how-step"><div class="step-num">Step 02</div><div class="step-title">Build the plan, then the program</div><div class="step-desc">Before we launch anything, you have a clear channel strategy, a defined ICP, a creative framework, and a 90-day roadmap.</div></div>
+      <div class="how-step"><div class="step-num">Step 03</div><div class="step-title">Execute, test, and compound</div><div class="step-desc">We launch fast, measure everything, and iterate weekly. Every decision is traceable back to data. The program improves every month.</div></div>
+    </div>
+  </div>
+  <div class="beliefs-section">
+    <div class="eyebrow">What we believe</div>
+    <h2 class="serif" style="font-size:2.5rem;font-weight:400;margin-bottom:2rem">The principles that <span class="italic muted">shape every engagement.</span></h2>
+    <div class="beliefs-grid">
+      <div class="belief-card"><div class="belief-dot"></div><div><div class="belief-title">Speed compounds</div><div class="belief-desc">A good campaign launched today beats a perfect one next month. Momentum matters more than polish.</div></div></div>
+      <div class="belief-card"><div class="belief-dot"></div><div><div class="belief-title">Creative is a performance lever</div><div class="belief-desc">The best media buying can't save bad creative. We treat them as one system.</div></div></div>
+      <div class="belief-card"><div class="belief-dot"></div><div><div class="belief-title">Test everything, assume nothing</div><div class="belief-desc">Gut instinct gets us to a hypothesis. Data gets us to a decision.</div></div></div>
+      <div class="belief-card"><div class="belief-dot"></div><div><div class="belief-title">Small is a feature</div><div class="belief-desc">You work with the people who built the program. No bait-and-switch to junior staff.</div></div></div>
+      <div class="belief-card"><div class="belief-dot"></div><div><div class="belief-title">Report on outcomes, not activity</div><div class="belief-desc">Pipeline, CAC, and revenue are the report. Impressions are context.</div></div></div>
+      <div class="belief-card"><div class="belief-dot"></div><div><div class="belief-title">AI is how we work, not what we sell</div><div class="belief-desc">We use it to move faster. We don't package it as a product.</div></div></div>
+    </div>
+  </div>
+  <div class="who-section">
+    <div class="eyebrow">Who we work with</div>
+    <h2 class="serif" style="font-size:2.5rem;font-weight:400;margin-bottom:.75rem">Built for the <span class="italic muted">challenger brand.</span></h2>
+    <p class="who-sub">Growth-stage companies across B2B and B2C -- $2M to $50M revenue, defined product, real market, marketing program that hasn't kept pace.</p>
+    <div class="who-grid">
+      <div class="who-card"><div class="who-name">B2B SaaS and tech</div><div class="who-desc">LinkedIn-first pipeline programs for software companies with long sales cycles.</div></div>
+      <div class="who-card"><div class="who-name">Health tech</div><div class="who-desc">Go-to-market programs for health tech navigating institutional buyers and credibility-first sales.</div></div>
+      <div class="who-card"><div class="who-name">Premium B2C</div><div class="who-desc">Performance programs for high-ticket consumer brands with passion-driven buyers.</div></div>
+      <div class="who-card"><div class="who-name">Professional services</div><div class="who-desc">Digital acquisition for law firms and consulting practices growing beyond referrals.</div></div>
+      <div class="who-card"><div class="who-name">Food and workplace tech</div><div class="who-desc">B2B demand gen for companies selling into office and facilities decision-makers.</div></div>
+      <div class="who-card"><div class="who-name">Growth-stage challengers</div><div class="who-desc">Any company $2M-$50M with a defined product and a marketing program that hasn't kept pace.</div></div>
+    </div>
+  </div>
+  <div class="cta-strip">
+    <div class="cta-headline serif">Want to know if we're <span class="italic muted">the right fit?</span></div>
+    <div><button class="btn-primary">Book a free 30-minute call</button><div class="cta-note">No pitch. No commitment. Just a straight conversation.</div></div>
+  </div>
+  <footer><div class="logo">CHALK FARMS</div><div style="font-size:12px;color:var(--text-secondary)">© 2026 Chalk Farms</div></footer>
+</div>
+
+<!-- ===================== PAGE 4: BOOK A CALL ===================== -->
+<div class="page-break"><span>Chalk Farms — Design Reference</span><span>PAGE 04 — Book a Call</span></div>
+<div class="page-wrapper">
+  <nav class="nav"><div class="logo">CHALK<span>&nbsp;FARMS</span></div><div class="nav-links"><a href="#">Work</a><a href="#">Services</a><a href="#">About</a><a href="#">Greenhouse</a><a href="#">Pricing</a></div><button class="nav-cta">Book a call</button></nav>
+  <div class="book-wrap">
+    <div class="book-left">
+      <div class="eyebrow">Book a call</div>
+      <h1 class="serif">Let's talk about <span class="italic muted">what's actually going on.</span></h1>
+      <p class="book-sub">This isn't a sales call. It's a straight 30-minute conversation about your situation -- where your growth program stands, what's blocking it, and whether Chalk Farms is the right fit.</p>
+      <div class="expect">
+        <div class="expect-label">What to expect</div>
+        <div class="expect-list">
+          <div class="expect-item"><div class="expect-dot"></div>A diagnosis, not a pitch. We'll ask about your current program and what's not working.</div>
+          <div class="expect-item"><div class="expect-dot"></div>Honest feedback. If we're not the right fit, we'll say so and point you somewhere better.</div>
+          <div class="expect-item"><div class="expect-dot"></div>A clear next step. You'll leave with something actionable.</div>
+          <div class="expect-item"><div class="expect-dot"></div>No commitment required. The call is free.</div>
+        </div>
+      </div>
+    </div>
+    <div class="book-right">
+      <div class="form-title">Tell us a little about yourself.</div>
+      <div class="field"><div class="field-header"><label>Your name</label></div><input type="text" placeholder="First and last name"></div>
+      <div class="field"><div class="field-header"><label>Work email</label></div><input type="email" placeholder="you@company.com"></div>
+      <div class="field"><div class="field-header"><label>Company</label></div><input type="text" placeholder="Company name"></div>
+      <div class="field"><div class="field-header"><label>What's the problem you're trying to solve?</label><span class="optional">Optional</span></div><textarea placeholder="Give us a sense of where you are and what's not working. The more context you share, the more useful the call will be."></textarea></div>
+      <button class="form-submit">Continue to scheduling →</button>
+      <p class="form-note">We'll never share your information or add you to a list without asking.</p>
+    </div>
+  </div>
+  <div class="proof-bar">
+    <div class="proof-cell"><div class="proof-num serif">$30M+</div><div class="proof-label">In ad spend managed across growth-stage brands</div></div>
+    <div class="proof-cell"><div class="proof-num serif">$20M+</div><div class="proof-label">In attributable revenue driven across client engagements</div></div>
+    <div class="proof-cell"><div class="proof-num serif">45+</div><div class="proof-label">Companies taken from stalled growth to scalable pipeline</div></div>
+  </div>
+  <footer><div class="logo">CHALK FARMS</div><div style="font-size:12px;color:var(--text-secondary)">© 2026 Chalk Farms</div></footer>
+</div>
+
+<!-- ===================== PAGE 5: GREENHOUSE ===================== -->
+<div class="page-break"><span>Chalk Farms — Design Reference</span><span>PAGE 05 — Greenhouse</span></div>
+<div class="page-wrapper">
+  <nav class="nav"><div class="logo">CHALK<span>&nbsp;FARMS</span></div><div class="nav-links"><a href="#">Work</a><a href="#">Services</a><a href="#">About</a><a href="#" class="active">Greenhouse</a><a href="#">Pricing</a></div><button class="nav-cta">Book a call</button></nav>
+  <div class="gh-hero">
+    <div class="eyebrow">Greenhouse</div>
+    <h1 class="serif">Where growth-stage thinking <span class="italic muted">gets published.</span></h1>
+    <p class="gh-sub">Frameworks, channel playbooks, and honest POVs for founders and marketing leads navigating the gap between scrappy startup and real scale. No fluff, no gatekeeping, no email required.</p>
+  </div>
+  <div class="cats">
+    <button class="cat active">All</button>
+    <button class="cat">Paid media</button>
+    <button class="cat">Performance creative</button>
+    <button class="cat">Lifecycle and retention</button>
+    <button class="cat">Growth strategy</button>
+    <button class="cat">Conversion</button>
+  </div>
+  <div class="featured-grid">
+    <div class="featured-main">
+      <div class="article-tag">Growth strategy</div>
+      <div class="article-title-lg serif">The $0 audit: how to diagnose your growth program before you fix it.</div>
+      <div class="article-desc">Most companies hire an agency before they understand what's actually broken. The result is an expensive solution to the wrong problem. Here's the diagnostic framework we run on every new engagement.</div>
+      <div class="article-meta"><span>Chalk Farms</span><div class="meta-dot"></div><span>8 min read</span></div>
+    </div>
+    <div class="featured-side">
+      <div class="featured-secondary">
+        <div class="article-tag">Paid media</div>
+        <div class="article-title-md serif">Why your LinkedIn CPL is high -- and what to actually do about it.</div>
+        <div class="article-desc">LinkedIn is the highest-intent B2B channel available. It's also the most consistently mismanaged.</div>
+        <div class="article-meta"><span>6 min read</span></div>
+      </div>
+      <div class="featured-secondary">
+        <div class="article-tag">Lifecycle and retention</div>
+        <div class="article-title-md serif">The difference between a lead nurture sequence and a lead burial sequence.</div>
+        <div class="article-desc">Most nurture programs don't nurture. They delay. Here's how to tell the difference.</div>
+        <div class="article-meta"><span>5 min read</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid-section">
+    <div class="grid-label">Latest from the Greenhouse</div>
+    <div class="article-grid">
+      <div class="grid-card"><div class="article-tag">Paid media</div><div class="article-title-sm serif">How we assign each channel a job -- and why most programs don't.</div><div class="article-meta" style="margin-top:.75rem"><span>5 min read</span></div></div>
+      <div class="grid-card"><div class="article-tag">Creative</div><div class="article-title-sm serif">Why B2B creative looks the same everywhere -- and how to fix it.</div><div class="article-meta" style="margin-top:.75rem"><span>6 min read</span></div></div>
+      <div class="grid-card"><div class="article-tag">Conversion</div><div class="article-title-sm serif">Your website is losing you leads. Here's where to look first.</div><div class="article-meta" style="margin-top:.75rem"><span>7 min read</span></div></div>
+      <div class="grid-card"><div class="article-tag">Lifecycle</div><div class="article-title-sm serif">HubSpot for non-HubSpot people: what you actually need to set up first.</div><div class="article-meta" style="margin-top:.75rem"><span>7 min read</span></div></div>
+      <div class="grid-card"><div class="article-tag">Paid media</div><div class="article-title-sm serif">The Google PMax playbook for companies that aren't e-commerce.</div><div class="article-meta" style="margin-top:.75rem"><span>6 min read</span></div></div>
+      <div class="grid-card"><div class="article-tag">Strategy</div><div class="article-title-sm serif">The ICP exercise every growth-stage company should do before spending on ads.</div><div class="article-meta" style="margin-top:.75rem"><span>8 min read</span></div></div>
+      <div class="grid-card"><div class="article-tag">Strategy</div><div class="article-title-sm serif">What a real 90-day growth roadmap looks like -- and what usually gets left out.</div><div class="article-meta" style="margin-top:.75rem"><span>9 min read</span></div></div>
+      <div class="grid-card"><div class="article-tag">Creative</div><div class="article-title-sm serif">What we learned from pausing a campaign that was working too well.</div><div class="article-meta" style="margin-top:.75rem"><span>5 min read</span></div></div>
+    </div>
+  </div>
+  <div class="nl-section">
+    <div><div class="eyebrow">Stay in the loop</div><div class="nl-title serif">New thinking, <span class="italic muted">when it's ready.</span></div><p class="nl-sub">We publish when we have something worth saying. Drop your email and we'll send new Greenhouse pieces directly to you.</p></div>
+    <div><div class="nl-form"><input class="nl-input" type="email" placeholder="your@email.com"><button class="nl-btn">Subscribe</button></div><div class="nl-note">No cadence. No filler. Unsubscribe anytime.</div></div>
+  </div>
+  <footer><div class="logo">CHALK FARMS</div><div style="font-size:12px;color:var(--text-secondary)">© 2026 Chalk Farms</div></footer>
+</div>
+
+<!-- ===================== PAGE 6: CASE STUDY — FELFEL ===================== -->
+<div class="page-break"><span>Chalk Farms — Design Reference</span><span>PAGE 06 — Case Study: FELFEL</span></div>
+<div class="page-wrapper">
+  <nav class="nav"><div class="logo">CHALK<span>&nbsp;FARMS</span></div><div class="nav-links"><a href="#" class="active">Work</a><a href="#">Services</a><a href="#">About</a><a href="#">Greenhouse</a><a href="#">Pricing</a></div><button class="nav-cta">Book a call</button></nav>
+  <div class="cs-hero">
+    <div class="cs-eyebrow">Case Study &nbsp;·&nbsp; FELFEL</div>
+    <div class="cs-headline">From stalled pipeline to <em>3x monthly SQL growth</em> in 60 days.</div>
+    <div class="cs-about"><div class="cs-about-label">About</div><div class="cs-about-text">FELFEL brings restaurant-quality, chef-crafted meals into the office through a smart fridge platform -- stocked every morning, open 24/7, zero admin. Trusted by 1,000+ companies across 12+ years. Founded in Switzerland, now serving the NYC tri-state market.</div></div>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><label>Client</label><span>FELFEL NYC</span></div>
+      <div class="cs-meta-item"><label>Industry</label><span>Food Tech / Workplace</span></div>
+      <div class="cs-meta-item"><label>Services</label><span>Paid Media, Lifecycle, Tracking</span></div>
+      <div class="cs-meta-item"><label>Engagement start</label><span>February 2026</span></div>
+    </div>
+    <div class="cs-stats">
+      <div class="cs-stat"><div class="cs-stat-num serif">3x</div><div class="cs-stat-label">SQL volume growth within 60 days of engagement</div></div>
+      <div class="cs-stat"><div class="cs-stat-num serif">103</div><div class="cs-stat-label">SQLs generated in March 2026 vs. 40/month goal</div></div>
+      <div class="cs-stat"><div class="cs-stat-num serif">2.5x</div><div class="cs-stat-label">Above monthly target, sustained over 6+ consecutive weeks</div></div>
+    </div>
+  </div>
+  <div class="cs-section">
+    <div class="cs-section-title">The situation</div>
+    <p class="cs-body">FELFEL had paid media running across three channels. The problem: they couldn't tell what was working. Ads were stale, audiences were broad, attribution was broken, and the program was consistently missing its 40 SQL/month target -- averaging around 30.</p>
+    <div class="cs-section-title">The approach</div>
+    <p class="cs-body">Before touching a single campaign, we rebuilt the tracking infrastructure -- GA4, GTM, and HubSpot. Then redesigned all creative and assigned each channel a distinct role:</p>
+    <div class="cs-channel-grid">
+      <div class="cs-channel"><div class="cs-channel-name">LinkedIn</div><div class="cs-channel-role">Quality driver. Targets decision-makers by title and company size.</div></div>
+      <div class="cs-channel"><div class="cs-channel-name">Meta</div><div class="cs-channel-role">Volume driver. Expanded audiences for top-of-funnel reach and retargeting.</div></div>
+      <div class="cs-channel"><div class="cs-channel-name">Google</div><div class="cs-channel-role">Efficiency driver. Search and display capturing in-market demand.</div></div>
+    </div>
+    <div class="cs-section-title">The results</div>
+    <div class="cs-chart-wrap">
+      <div class="cs-chart-header"><strong>Monthly SQL volume</strong><span>Goal: 40 SQLs/month</span></div>
+      <div class="cs-chart-inner">
+        <div class="cs-bar-row"><div class="cs-bar-label">Jan 2026</div><div class="cs-bar-track"><div class="cs-bar-fill before" style="width:29%">30</div></div></div>
+        <div class="cs-bar-row"><div class="cs-bar-label">Feb 2026</div><div class="cs-bar-track"><div class="cs-bar-fill after" style="width:50%">52 &nbsp;↑ start 2/9</div></div></div>
+        <div class="cs-bar-row"><div class="cs-bar-label">Mar 2026</div><div class="cs-bar-track"><div class="cs-bar-fill after" style="width:99%">103</div></div></div>
+        <div class="cs-annotation">SQLs = Sales Qualified Leads entering the US pipeline.</div>
+      </div>
+    </div>
+    <div class="cs-inflection"><div class="cs-inflection-text serif">"Within three weeks of rebuilding the program, weekly SQLs went from 3-6 to 12-15. By March, we were running at 2.5x goal consistently."</div><div class="cs-inflection-attr">Chalk Farms -- FELFEL engagement review, March 2026</div></div>
+    <div class="cs-cta-strip"><div class="cs-cta-text serif">Ready to rebuild your pipeline?</div><button class="btn-primary">Book a call</button></div>
+  </div>
+  <footer><div class="logo">CHALK FARMS</div><div style="font-size:12px;color:var(--text-secondary)">© 2026 Chalk Farms</div></footer>
+</div>
+
+<!-- ===================== PAGE 7: CASE STUDY — BENCHMARK VEHICLES ===================== -->
+<div class="page-break"><span>Chalk Farms — Design Reference</span><span>PAGE 07 — Case Study: Benchmark Vehicles</span></div>
+<div class="page-wrapper">
+  <nav class="nav"><div class="logo">CHALK<span>&nbsp;FARMS</span></div><div class="nav-links"><a href="#" class="active">Work</a><a href="#">Services</a><a href="#">About</a><a href="#">Greenhouse</a><a href="#">Pricing</a></div><button class="nav-cta">Book a call</button></nav>
+  <div class="cs-hero">
+    <div class="cs-eyebrow">Case Study &nbsp;·&nbsp; Benchmark Vehicles</div>
+    <div class="cs-headline">Built from zero to <em>demand they couldn't keep up with.</em></div>
+    <div class="cs-about"><div class="cs-about-label">About</div><div class="cs-about-text">Benchmark Vehicles builds fully custom adventure vehicles -- Sprinter van conversions, INEOS Grenadier upfits, and rally Porsches -- from Portland, Oregon. Every build is bespoke, high-ticket, and made to order. Before Chalk Farms, their only marketing was organic Instagram.</div></div>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><label>Client</label><span>Benchmark Vehicles</span></div>
+      <div class="cs-meta-item"><label>Industry</label><span>Premium B2C / Adventure</span></div>
+      <div class="cs-meta-item"><label>Services</label><span>Paid Media, Creative Strategy</span></div>
+      <div class="cs-meta-item"><label>Starting point</label><span>Zero paid media</span></div>
+    </div>
+    <div class="cs-stats">
+      <div class="cs-stat"><div class="cs-stat-num serif">18+</div><div class="cs-stat-label">Van pre-bookings per quarter -- goal surpassed, media paused to manage demand</div></div>
+      <div class="cs-stat"><div class="cs-stat-num serif">2x</div><div class="cs-stat-label">Returning customer rate driven by retargeting and lifecycle strategy</div></div>
+      <div class="cs-stat"><div class="cs-stat-num serif">27%</div><div class="cs-stat-label">Increase in total site users driven by paid search and organic lift</div></div>
+    </div>
+  </div>
+  <div class="cs-section">
+    <div class="cs-section-title">The situation</div>
+    <p class="cs-body">Benchmark had a loyal Instagram following and a product that sold itself in person. But their pipeline was thin -- relying on word of mouth for a high-ticket, made-to-order product with a 6-month build cycle. Goal: pre-book 18 vans per quarter. Starting point: no paid media infrastructure, no tracking, no data.</p>
+    <div class="cs-section-title">The approach</div>
+    <div class="cs-channel-grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cs-channel"><div class="cs-channel-name">YouTube</div><div class="cs-channel-role">Awareness and consideration. Vertical video for action, horizontal for reach. Intent audiences over Interest.</div></div>
+      <div class="cs-channel"><div class="cs-channel-name">Google Search</div><div class="cs-channel-role">High-intent demand capture. Highest CTR (9.25%) at lowest CPC ($0.67).</div></div>
+      <div class="cs-channel"><div class="cs-channel-name">Performance Max</div><div class="cs-channel-role">Conversion engine. 12 form submissions in its first week live. $0.23 CPC by December.</div></div>
+      <div class="cs-channel"><div class="cs-channel-name">Meta</div><div class="cs-channel-role">Retargeting and lookalike audiences built from existing customers.</div></div>
+    </div>
+    <div class="cs-section-title">The results</div>
+    <div class="cs-mini-stats">
+      <div class="cs-mini-stat"><div class="cs-mini-num serif">26</div><div class="cs-mini-label">Form submissions in Nov-Dec alone</div></div>
+      <div class="cs-mini-stat"><div class="cs-mini-num serif">$0.23</div><div class="cs-mini-label">CPC on PMax conversions by December</div></div>
+      <div class="cs-mini-stat"><div class="cs-mini-num serif">1,935</div><div class="cs-mini-label">Clicks on email and phone number on site</div></div>
+    </div>
+    <div class="cs-inflection"><div class="cs-inflection-text serif">"The goal was to extend the pipeline from 6 months to 18 months. We hit the van pre-booking target, doubled returning customers, and grew site users 27% -- then paused because demand outpaced capacity. That's the right problem to have."</div><div class="cs-inflection-attr">Chalk Farms -- Benchmark Vehicles engagement review, Q4 2025</div></div>
+    <div class="cs-cta-strip"><div class="cs-cta-text serif">Ready to build a pipeline your team can't keep up with?</div><button class="btn-primary">Book a call</button></div>
+  </div>
+  <footer><div class="logo">CHALK FARMS</div><div style="font-size:12px;color:var(--text-secondary)">© 2026 Chalk Farms</div></footer>
+</div>
+
+</body>
+</html>
