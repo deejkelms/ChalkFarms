@@ -58,20 +58,20 @@ export default function WorkPage() {
   return (
     <>
       {/* Hero */}
-      <section className="px-8 pt-16 pb-14 border-b-chalk">
+      <section className="px-5 sm:px-8 pt-12 sm:pt-16 pb-10 sm:pb-14 border-b-chalk">
         <div className="eyebrow mb-5">Work</div>
-        <h1 className="font-display text-[3.25rem] leading-[1.1] mb-4">
+        <h1 className="font-display text-[2.25rem] sm:text-[3.25rem] leading-[1.1] mb-4">
           Results that <span className="italic text-[var(--text-secondary)]">speak plainly.</span>
         </h1>
-        <p className="text-[16px] leading-[1.7] text-[var(--text-secondary)] max-w-[520px]">
+        <p className="text-[15px] sm:text-[16px] leading-[1.7] text-[var(--text-secondary)] max-w-[520px]">
           A look at what happens when strategy comes first. Real numbers, real clients,
           real outcomes.
         </p>
       </section>
 
       {/* Case study grid */}
-      <section className="px-8 py-10">
-        <div className="grid grid-cols-2 gap-3">
+      <section className="px-5 sm:px-8 py-8 sm:py-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {caseStudies.map((cs) => {
             const inner = (
               <>
@@ -107,14 +107,14 @@ export default function WorkPage() {
               <Link
                 key={cs.client}
                 href={cs.href}
-                className="block border-chalk rounded-chalk-lg p-7 no-underline text-[var(--text)] hover:border-chalk-2 transition-colors"
+                className="block border-chalk rounded-chalk-lg p-5 sm:p-7 no-underline text-[var(--text)] hover:border-chalk-2 transition-colors"
               >
                 {inner}
               </Link>
             ) : (
               <div
                 key={cs.client}
-                className="border-chalk rounded-chalk-lg p-7 opacity-50"
+                className="border-chalk rounded-chalk-lg p-5 sm:p-7 opacity-50"
               >
                 {inner}
               </div>

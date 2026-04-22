@@ -26,27 +26,27 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="px-8 pt-16 pb-14 border-b-chalk">
+      <section className="px-5 sm:px-8 pt-12 sm:pt-16 pb-10 sm:pb-14 border-b-chalk">
         <div className="eyebrow mb-5">Growth marketing agency</div>
-        <h1 className="font-display text-[3.25rem] leading-[1.1] mb-6 max-w-[680px]">
+        <h1 className="font-display text-[2.25rem] sm:text-[3.25rem] leading-[1.1] mb-5 sm:mb-6 max-w-[680px]">
           Full-funnel growth marketing for{' '}
           <span className="italic text-[var(--text-secondary)]">challenger brands.</span>
         </h1>
-        <p className="text-[16px] leading-[1.7] text-[var(--text-secondary)] max-w-[560px] mb-8">
+        <p className="text-[15px] sm:text-[16px] leading-[1.7] text-[var(--text-secondary)] max-w-[560px] mb-7 sm:mb-8">
           Chalk Farms builds the marketing engines that take growth-stage companies from stalled to
           scalable — across paid media, performance creative, lifecycle marketing, and conversion
           strategy.
         </p>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
           <Link
             href="/services"
-            className="inline-block text-[13px] font-medium px-6 py-3 bg-[var(--text)] text-white rounded-chalk no-underline"
+            className="inline-block text-[13px] font-medium px-6 py-[13px] sm:py-3 bg-[var(--text)] text-white rounded-chalk no-underline"
           >
             See our services
           </Link>
           <Link
             href="/work"
-            className="text-[13px] text-[var(--text-secondary)] no-underline"
+            className="text-[13px] text-[var(--text-secondary)] no-underline py-2"
           >
             View our work →
           </Link>
@@ -58,7 +58,7 @@ export default function HomePage() {
         <p className="text-center text-[11px] tracking-[0.1em] uppercase text-[var(--text-secondary)] mb-3">
           Growth-stage brands that chose to scale differently
         </p>
-        <div className="flex gap-10 items-center flex-wrap justify-center px-8">
+        <div className="flex gap-10 items-center flex-wrap justify-center px-5 sm:px-8">
           {clients.map((client, i) => (
             <span key={client} className="flex items-center gap-10">
               <span className="text-[13px] font-medium text-[var(--text-secondary)]">{client}</span>
@@ -74,20 +74,17 @@ export default function HomePage() {
       <ProofBar />
 
       {/* Services */}
-      <section className="px-8 py-14 border-b-chalk">
+      <section className="px-5 sm:px-8 py-10 sm:py-14 border-b-chalk">
         <p className="text-[11px] tracking-[0.12em] uppercase text-[var(--text-secondary)] mb-4">
           Services
         </p>
-        <h2 className="font-display text-[2.5rem] leading-[1.2] mb-10 max-w-[560px]">
+        <h2 className="font-display text-[2rem] sm:text-[2.5rem] leading-[1.2] mb-8 sm:mb-10 max-w-[560px]">
           Everything you need to grow.{' '}
           <span className="italic text-[var(--text-secondary)]">Nothing you don't.</span>
         </h2>
-        <div
-          className="grid grid-cols-3 border-chalk rounded-chalk-lg overflow-hidden"
-          style={{ gap: '1px', background: 'var(--border)' }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-sep border-chalk rounded-chalk-lg overflow-hidden">
           {services.map((s) => (
-            <div key={s.num} className="bg-white p-6">
+            <div key={s.num} className="bg-white p-5 sm:p-6">
               <div className="text-[11px] text-[var(--text-secondary)] font-medium mb-3">{s.num}</div>
               <div className="text-[14px] font-medium mb-2">{s.name}</div>
               <div className="text-[12px] text-[var(--text-secondary)] leading-[1.55] mb-4">{s.desc}</div>
@@ -100,13 +97,13 @@ export default function HomePage() {
       </section>
 
       {/* Work preview */}
-      <section className="px-8 py-14 border-b-chalk">
+      <section className="px-5 sm:px-8 py-10 sm:py-14 border-b-chalk">
         <p className="text-[11px] tracking-[0.12em] uppercase text-[var(--text-secondary)] mb-4">Work</p>
-        <h2 className="font-display text-[2.5rem] leading-[1.2] mb-10 max-w-[560px]">
+        <h2 className="font-display text-[2rem] sm:text-[2.5rem] leading-[1.2] mb-8 sm:mb-10 max-w-[560px]">
           Results that <span className="italic text-[var(--text-secondary)]">speak plainly.</span>
         </h2>
-        <div className="grid grid-cols-2 gap-3">
-          <Link href="/work/felfel" className="block border-chalk rounded-chalk-lg p-7 no-underline text-[var(--text)] hover:border-chalk-2 transition-colors">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <Link href="/work/felfel" className="block border-chalk rounded-chalk-lg p-5 sm:p-7 no-underline text-[var(--text)] hover:border-chalk-2 transition-colors">
             <div className="text-[11px] tracking-[0.1em] uppercase text-[var(--text-secondary)] mb-3">
               FELFEL &nbsp;·&nbsp; Food tech / B2B
             </div>
@@ -127,7 +124,7 @@ export default function HomePage() {
             <div className="text-[13px] text-[var(--text-secondary)] mt-4">Read case study →</div>
           </Link>
 
-          <Link href="/work/benchmark-vehicles" className="block border-chalk rounded-chalk-lg p-7 no-underline text-[var(--text)] hover:border-chalk-2 transition-colors">
+          <Link href="/work/benchmark-vehicles" className="block border-chalk rounded-chalk-lg p-5 sm:p-7 no-underline text-[var(--text)] hover:border-chalk-2 transition-colors">
             <div className="text-[11px] tracking-[0.1em] uppercase text-[var(--text-secondary)] mb-3">
               Benchmark Vehicles &nbsp;·&nbsp; Premium B2C
             </div>
@@ -151,13 +148,13 @@ export default function HomePage() {
       </section>
 
       {/* The model */}
-      <section className="px-8 py-14 border-b-chalk">
+      <section className="px-5 sm:px-8 py-10 sm:py-14 border-b-chalk">
         <p className="text-[11px] tracking-[0.12em] uppercase text-[var(--text-secondary)] mb-4">The model</p>
-        <h2 className="font-display text-[2.5rem] leading-[1.2] mb-10 max-w-[560px]">
+        <h2 className="font-display text-[2rem] sm:text-[2.5rem] leading-[1.2] mb-8 sm:mb-10 max-w-[560px]">
           Strategy first.{' '}
           <span className="italic text-[var(--text-secondary)]">Performance always.</span>
         </h2>
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
           <div className="text-[14px] leading-[1.75] text-[var(--text-secondary)] space-y-4">
             <p>
               Most growth agencies are execution shops. They take your brief, run your ads, and
@@ -189,10 +186,10 @@ export default function HomePage() {
       </section>
 
       {/* Greenhouse teaser */}
-      <section className="px-8 py-14 border-b-chalk">
+      <section className="px-5 sm:px-8 py-10 sm:py-14 border-b-chalk">
         <div
-          className="rounded-chalk-lg p-10 grid gap-8"
-          style={{ background: 'var(--bg-secondary)', gridTemplateColumns: '1fr auto', alignItems: 'center' }}
+          className="rounded-chalk-lg p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-8 lg:items-center"
+          style={{ background: 'var(--bg-secondary)' }}
         >
           <div>
             <div className="text-[11px] tracking-[0.1em] uppercase text-[var(--text-secondary)] mb-3">
@@ -208,7 +205,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/greenhouse"
-            className="inline-block text-[13px] font-medium px-[22px] py-3 border-chalk-2 rounded-chalk no-underline text-[var(--text)] whitespace-nowrap"
+            className="inline-block text-[13px] font-medium px-[22px] py-[13px] lg:py-3 border-chalk-2 rounded-chalk no-underline text-[var(--text)] whitespace-nowrap"
           >
             Explore Greenhouse →
           </Link>

@@ -46,9 +46,9 @@ export default function GreenhousePage() {
   return (
     <>
       {/* Hero */}
-      <section className="px-8 pt-14 pb-14 border-b-chalk">
+      <section className="px-5 sm:px-8 pt-12 sm:pt-14 pb-10 sm:pb-14 border-b-chalk">
         <div className="eyebrow mb-5">Greenhouse</div>
-        <h1 className="font-display text-[3rem] leading-[1.15] mb-4 max-w-[600px]">
+        <h1 className="font-display text-[2.25rem] sm:text-[3rem] leading-[1.15] mb-4 max-w-[600px]">
           Where growth-stage thinking{' '}
           <span className="italic text-[var(--text-secondary)]">gets published.</span>
         </h1>
@@ -60,30 +60,29 @@ export default function GreenhousePage() {
       </section>
 
       {/* Category filter */}
-      <div className="px-8 py-3 border-b-chalk flex gap-2 flex-wrap">
-        {categories.map((cat, i) => (
-          <button
-            key={cat}
-            className={`text-[12px] px-[14px] py-[5px] rounded-full border-chalk-2 font-sans cursor-pointer ${
-              i === 0 ? 'bg-[var(--text)] text-white border-transparent' : 'text-[var(--text-secondary)] bg-transparent'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+      <div className="border-b-chalk py-3 overflow-x-auto">
+        <div className="flex gap-2 min-w-max sm:min-w-0 sm:flex-wrap px-5 sm:px-8">
+          {categories.map((cat, i) => (
+            <button
+              key={cat}
+              className={`text-[12px] px-[14px] py-[10px] sm:py-[5px] rounded-full border-chalk-2 font-sans cursor-pointer whitespace-nowrap ${
+                i === 0 ? 'bg-[var(--text)] text-white border-transparent' : 'text-[var(--text-secondary)] bg-transparent'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Featured articles */}
-      <div
-        className="grid border-b-chalk"
-        style={{ gridTemplateColumns: '1.25fr 1fr', gap: '1px', background: 'var(--border)' }}
-      >
+      <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] grid-sep border-b-chalk">
         {/* Main featured */}
-        <div className="bg-white p-8">
+        <div className="bg-white p-6 sm:p-8">
           <div className="text-[11px] tracking-[0.08em] uppercase text-[var(--green)] font-medium mb-3">
             {featuredMain.tag}
           </div>
-          <div className="font-display text-[1.9rem] leading-[1.25] mb-3">{featuredMain.title}</div>
+          <div className="font-display text-[1.5rem] sm:text-[1.9rem] leading-[1.25] mb-3">{featuredMain.title}</div>
           <div className="text-[13px] text-[var(--text-secondary)] leading-[1.65] mb-4">
             {featuredMain.desc}
           </div>
@@ -95,9 +94,9 @@ export default function GreenhousePage() {
         </div>
 
         {/* Side featured */}
-        <div className="flex flex-col" style={{ gap: '1px', background: 'var(--border)' }}>
+        <div className="flex flex-col grid-sep" style={{ background: 'var(--border)' }}>
           {featuredSecondary.map((article) => (
-            <div key={article.title} className="bg-white p-7 flex-1">
+            <div key={article.title} className="bg-white p-6 sm:p-7 flex-1">
               <div className="text-[11px] tracking-[0.08em] uppercase text-[var(--green)] font-medium mb-3">
                 {article.tag}
               </div>
@@ -112,16 +111,13 @@ export default function GreenhousePage() {
       </div>
 
       {/* Article grid */}
-      <section className="px-8 py-10 border-b-chalk">
+      <section className="px-5 sm:px-8 py-8 sm:py-10 border-b-chalk">
         <div className="text-[11px] uppercase tracking-[0.1em] text-[var(--text-secondary)] mb-6">
           Latest from the Greenhouse
         </div>
-        <div
-          className="grid grid-cols-4 border-chalk rounded-chalk-lg overflow-hidden"
-          style={{ gap: '1px', background: 'var(--border)' }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-sep border-chalk rounded-chalk-lg overflow-hidden">
           {articles.map((article) => (
-            <div key={article.title} className="bg-white p-6">
+            <div key={article.title} className="bg-white p-5 sm:p-6">
               <div className="text-[11px] tracking-[0.08em] uppercase text-[var(--green)] font-medium mb-3">
                 {article.tag}
               </div>
@@ -135,10 +131,7 @@ export default function GreenhousePage() {
       </section>
 
       {/* Newsletter */}
-      <section
-        className="px-8 py-12 border-b-chalk grid gap-12"
-        style={{ gridTemplateColumns: '1fr 1fr', alignItems: 'center' }}
-      >
+      <section className="px-5 sm:px-8 py-8 sm:py-12 border-b-chalk grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 lg:items-center">
         <div>
           <div className="eyebrow mb-5">Stay in the loop</div>
           <div className="font-display text-[1.75rem] mb-3">

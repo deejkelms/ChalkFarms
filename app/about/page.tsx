@@ -46,9 +46,9 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="px-8 pt-16 pb-14 border-b-chalk">
+      <section className="px-5 sm:px-8 pt-12 sm:pt-16 pb-10 sm:pb-14 border-b-chalk">
         <div className="eyebrow mb-5">About</div>
-        <h1 className="font-display text-[3.25rem] leading-[1.1]">
+        <h1 className="font-display text-[2.25rem] sm:text-[3.25rem] leading-[1.1]">
           We build growth engines for{' '}
           <span className="italic text-[var(--text-secondary)]">
             companies that can't afford to get it wrong.
@@ -57,9 +57,9 @@ export default function AboutPage() {
       </section>
 
       {/* Thesis */}
-      <section className="px-8 py-6 border-b-chalk">
+      <section className="px-5 sm:px-8 py-8 sm:py-10 border-b-chalk">
         <div className="eyebrow mb-5">Our thesis</div>
-        <div className="grid gap-12" style={{ gridTemplateColumns: '1fr 1.75fr', alignItems: 'start' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.75fr] gap-8 lg:gap-12 lg:items-start">
           <div className="font-display text-[1.75rem] leading-[1.2]">
             Growth marketing is broken{' '}
             <span className="italic text-[var(--text-secondary)]">for the middle.</span>
@@ -89,19 +89,16 @@ export default function AboutPage() {
 
       {/* How we work */}
       <section className="border-b-chalk">
-        <div className="px-8 pt-10">
+        <div className="px-5 sm:px-8 pt-8 sm:pt-10">
           <div className="eyebrow mb-5">How we work</div>
-          <h2 className="font-display text-[2.5rem] leading-[1.2] mb-8">
+          <h2 className="font-display text-[2rem] sm:text-[2.5rem] leading-[1.2] mb-8">
             A process built for{' '}
             <span className="italic text-[var(--text-secondary)]">speed and accountability.</span>
           </h2>
         </div>
-        <div
-          className="grid grid-cols-3 border-t-chalk"
-          style={{ gap: '1px', background: 'var(--border)' }}
-        >
-          {steps.map((step) => (
-            <div key={step.num} className="bg-white p-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 grid-sep border-t-chalk">
+          {steps.map((step, i) => (
+            <div key={step.num} className={`bg-white p-6 sm:p-8 ${i < steps.length - 1 ? 'border-b-chalk sm:border-b-0' : ''}`}>
               <div className="text-[11px] font-medium text-[var(--text-secondary)] tracking-[0.06em] mb-4">
                 {step.num}
               </div>
@@ -113,16 +110,13 @@ export default function AboutPage() {
       </section>
 
       {/* Beliefs */}
-      <section className="px-8 py-12 border-b-chalk">
+      <section className="px-5 sm:px-8 py-8 sm:py-12 border-b-chalk">
         <div className="eyebrow mb-5">What we believe</div>
-        <h2 className="font-display text-[2.5rem] leading-[1.2] mb-8">
+        <h2 className="font-display text-[2rem] sm:text-[2.5rem] leading-[1.2] mb-8">
           The principles that{' '}
           <span className="italic text-[var(--text-secondary)]">shape every engagement.</span>
         </h2>
-        <div
-          className="grid grid-cols-2 rounded-chalk-lg overflow-hidden border-chalk"
-          style={{ gap: '1px', background: 'var(--border)' }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 grid-sep rounded-chalk-lg overflow-hidden border-chalk">
           {beliefs.map((b) => (
             <div key={b.title} className="bg-white p-6 flex gap-4">
               <div className="w-[6px] h-[6px] rounded-full bg-[var(--green)] flex-shrink-0 mt-[5px]" />
@@ -136,19 +130,16 @@ export default function AboutPage() {
       </section>
 
       {/* Who we work with */}
-      <section className="px-8 py-12 border-b-chalk">
+      <section className="px-5 sm:px-8 py-8 sm:py-12 border-b-chalk">
         <div className="eyebrow mb-5">Who we work with</div>
-        <h2 className="font-display text-[2.5rem] leading-[1.2] mb-3">
+        <h2 className="font-display text-[2rem] sm:text-[2.5rem] leading-[1.2] mb-3">
           Built for the <span className="italic text-[var(--text-secondary)]">challenger brand.</span>
         </h2>
         <p className="text-[15px] text-[var(--text-secondary)] mb-8 max-w-[560px] leading-[1.7]">
           Growth-stage companies across B2B and B2C — $2M to $50M revenue, defined product, real
           market, marketing program that hasn't kept pace.
         </p>
-        <div
-          className="grid grid-cols-3 rounded-chalk-lg overflow-hidden border-chalk"
-          style={{ gap: '1px', background: 'var(--border)' }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-sep rounded-chalk-lg overflow-hidden border-chalk">
           {verticals.map((v) => (
             <div key={v.name} className="bg-white p-6">
               <div className="text-[13px] font-medium mb-[5px]">{v.name}</div>

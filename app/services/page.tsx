@@ -96,13 +96,13 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="px-8 pt-16 pb-12 border-b-chalk">
+      <section className="px-5 sm:px-8 pt-12 sm:pt-16 pb-10 sm:pb-12 border-b-chalk">
         <div className="eyebrow mb-5">Services</div>
-        <h1 className="font-display text-[3.25rem] leading-[1.15] mb-4 max-w-[680px]">
+        <h1 className="font-display text-[2.25rem] sm:text-[3.25rem] leading-[1.15] mb-4 max-w-[680px]">
           The full stack for{' '}
           <span className="italic text-[var(--text-secondary)]">companies ready to scale.</span>
         </h1>
-        <p className="text-[16px] leading-[1.7] text-[var(--text-secondary)] max-w-[560px]">
+        <p className="text-[15px] sm:text-[16px] leading-[1.7] text-[var(--text-secondary)] max-w-[560px]">
           Six service lines built around the complete growth journey. Engage one or build a full
           program. All of it run by senior operators, not account managers.
         </p>
@@ -112,10 +112,9 @@ export default function ServicesPage() {
       {services.map((s) => (
         <div
           key={s.num}
-          className="grid border-b-chalk"
-          style={{ gridTemplateColumns: '1fr 1.6fr' }}
+          className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] border-b-chalk"
         >
-          <div className="p-8 border-r-chalk">
+          <div className="px-5 sm:px-8 py-6 sm:py-8 border-b-chalk lg:border-b-0 lg:border-r-chalk">
             <div className="text-[11px] text-[var(--text-secondary)] font-medium mb-3 tracking-[0.06em]">
               {s.num}
             </div>
@@ -131,7 +130,7 @@ export default function ServicesPage() {
               {s.icp}
             </div>
           </div>
-          <div className="p-8">
+          <div className="px-5 sm:px-8 py-6 sm:py-8">
             <p className="text-[15px] leading-[1.75] text-[var(--text-secondary)] mb-6">{s.desc}</p>
             <div className="text-[11px] uppercase tracking-[0.1em] text-[var(--text-secondary)] mb-3">
               What's included
@@ -149,9 +148,9 @@ export default function ServicesPage() {
       ))}
 
       {/* Pricing */}
-      <section id="pricing" className="px-8 py-14">
+      <section id="pricing" className="px-5 sm:px-8 py-10 sm:py-14">
         <div className="eyebrow mb-5">Pricing</div>
-        <h2 className="font-display text-[2.75rem] leading-[1.15] mb-4">
+        <h2 className="font-display text-[2rem] sm:text-[2.75rem] leading-[1.15] mb-4">
           Transparent pricing.{' '}
           <span className="italic text-[var(--text-secondary)]">No surprises.</span>
         </h2>
@@ -160,14 +159,11 @@ export default function ServicesPage() {
           points — not bait-and-switch minimums.
         </p>
 
-        <div
-          className="grid grid-cols-3 border-chalk rounded-chalk-lg overflow-hidden mb-10"
-          style={{ gap: '1px', background: 'var(--border)' }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-sep border-chalk rounded-chalk-lg overflow-hidden mb-10">
           {pricing.map((p) => (
             <div
               key={p.name}
-              className="p-7"
+              className="p-5 sm:p-7"
               style={{ background: p.featured ? 'var(--bg-secondary)' : '#fff' }}
             >
               <div className="text-[13px] font-medium mb-[6px]">{p.name}</div>
@@ -184,7 +180,7 @@ export default function ServicesPage() {
               </div>
               <Link
                 href={p.href ?? '/book-a-call'}
-                className={`block w-full text-[12px] font-medium py-[9px] text-center rounded-chalk no-underline ${
+                className={`block w-full text-[12px] font-medium py-[13px] sm:py-[9px] text-center rounded-chalk no-underline ${
                   p.primary
                     ? 'bg-[var(--text)] text-white'
                     : 'bg-transparent border-chalk-2 text-[var(--text)]'
@@ -198,7 +194,7 @@ export default function ServicesPage() {
 
         {/* FAQ */}
         <h3 className="font-display text-[1.5rem] mb-8">Pricing questions, answered plainly.</h3>
-        <div className="grid grid-cols-2 gap-6" style={{ columnGap: '2.5rem' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-x-10">
           {faqs.map((faq) => (
             <div key={faq.q}>
               <div className="text-[14px] font-medium mb-[6px]">{faq.q}</div>
