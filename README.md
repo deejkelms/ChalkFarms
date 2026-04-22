@@ -99,7 +99,7 @@ Add these to a `.env.local` file when ready:
 ```env
 NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/mackenzieleahy/30-minute-meeting-clone
 HUBSPOT_ACCESS_TOKEN=your-private-app-token
-NEXT_PUBLIC_HUBSPOT_PORTAL_ID=245975191
+NEXT_PUBLIC_HUBSPOT_PORTAL_ID=XXXXXX
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 NEXT_PUBLIC_META_PIXEL_ID=XXXXXXXXXXXXXXX
 ```
