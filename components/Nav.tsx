@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 
@@ -28,11 +29,11 @@ export default function Nav() {
   return (
     <>
       <nav className="flex items-center justify-between px-5 sm:px-8 py-4 sm:py-5 border-b-chalk relative z-50 bg-white">
-        <Link
-          href="/"
-          className="text-[15px] font-medium tracking-[0.08em] text-[var(--text)] no-underline"
-        >
-          CHALK<span className="text-[var(--text-secondary)]">&nbsp;FARMS</span>
+        <Link href="/" className="flex items-center gap-2 no-underline">
+          <Image src="/logo.png" alt="Chalk Farms" width={32} height={22} className="h-[22px] w-auto" />
+          <span className="text-[15px] font-medium tracking-[0.08em] text-[var(--text)]">
+            CHALK<span className="text-[var(--text-secondary)]">&nbsp;FARMS</span>
+          </span>
         </Link>
 
         <div className="hidden lg:flex gap-8">
