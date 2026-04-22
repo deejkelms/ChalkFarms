@@ -89,16 +89,17 @@ Deploys as a fully static site. Push to GitHub and connect to Vercel for automat
 
 | Integration | Purpose | Status |
 |---|---|---|
-| Calendly | Scheduling on Book a Call page | `NEXT_PUBLIC_CALENDLY_URL` — pending |
-| Newsletter | Greenhouse email signup | `NEXT_PUBLIC_NEWSLETTER_ENDPOINT` — pending |
+| Calendly | Scheduling on Book a Call page | `NEXT_PUBLIC_CALENDLY_URL` — ✅ wired |
+| HubSpot | CRM contacts + newsletter signups | `HUBSPOT_ACCESS_TOKEN` + `NEXT_PUBLIC_HUBSPOT_PORTAL_ID` — pending token |
 | Google Analytics | Site tracking | `NEXT_PUBLIC_GA_ID` — pending |
 | Meta Pixel | Ad retargeting | `NEXT_PUBLIC_META_PIXEL_ID` — pending |
 
 Add these to a `.env.local` file when ready:
 
 ```env
-NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/your-link
-NEXT_PUBLIC_NEWSLETTER_ENDPOINT=https://your-endpoint
+NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/mackenzieleahy/30-minute-meeting-clone
+HUBSPOT_ACCESS_TOKEN=your-private-app-token
+NEXT_PUBLIC_HUBSPOT_PORTAL_ID=245975191
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 NEXT_PUBLIC_META_PIXEL_ID=XXXXXXXXXXXXXXX
 ```

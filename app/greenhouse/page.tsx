@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import NewsletterForm from '@/components/NewsletterForm'
 
 export const metadata: Metadata = {
   title: 'Greenhouse — Chalk Farms',
@@ -40,7 +41,6 @@ const articles = [
   { tag: 'Creative', title: 'What we learned from pausing a campaign that was working too well.', readTime: '5 min read' },
 ]
 
-const NEWSLETTER_ENDPOINT = process.env.NEXT_PUBLIC_NEWSLETTER_ENDPOINT ?? ''
 
 export default function GreenhousePage() {
   return (
@@ -150,28 +150,7 @@ export default function GreenhousePage() {
           </p>
         </div>
         <div>
-          <form
-            action={NEWSLETTER_ENDPOINT || '#'}
-            method="post"
-            className="flex gap-[10px] mt-6"
-          >
-            <input
-              type="email"
-              name="email"
-              placeholder="your@email.com"
-              required
-              className="flex-1 px-[14px] py-[11px] text-[14px] bg-white border-chalk-2 rounded-chalk outline-none"
-            />
-            <button
-              type="submit"
-              className="px-[22px] py-[11px] bg-[var(--text)] text-white rounded-chalk text-[13px] font-medium whitespace-nowrap cursor-pointer"
-            >
-              Subscribe
-            </button>
-          </form>
-          <div className="text-[11px] text-[var(--text-secondary)] mt-3">
-            No cadence. No filler. Unsubscribe anytime.
-          </div>
+          <NewsletterForm />
         </div>
       </section>
     </>
