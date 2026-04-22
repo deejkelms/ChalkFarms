@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${instrumentSerif.variable} ${dmSans.variable}`}>
-        <div className="max-w-[900px] mx-auto bg-white shadow-[0_0_0_0.5px_rgba(26,26,26,0.15)]">
+        <div className="w-full lg:max-w-[900px] lg:mx-auto bg-white lg:shadow-[0_0_0_0.5px_rgba(26,26,26,0.15)]">
           <Nav />
           <main>{children}</main>
           <Footer />

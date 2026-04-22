@@ -19,14 +19,11 @@ const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL ?? 'https://calendly.c
 export default function BookACallPage() {
   return (
     <>
-      <div
-        className="grid border-b-chalk"
-        style={{ gridTemplateColumns: '1fr 1fr' }}
-      >
+      <div className="grid grid-cols-1 lg:grid-cols-2 border-b-chalk">
         {/* Left — context */}
-        <div className="px-10 py-14 border-r-chalk">
+        <div className="px-5 sm:px-10 py-10 sm:py-14 border-b-chalk lg:border-b-0 lg:border-r-chalk">
           <div className="eyebrow mb-5">Book a call</div>
-          <h1 className="font-display text-[2.5rem] leading-[1.15] mb-4">
+          <h1 className="font-display text-[2rem] sm:text-[2.5rem] leading-[1.15] mb-4">
             Let's talk about{' '}
             <span className="italic text-[var(--text-secondary)]">what's actually going on.</span>
           </h1>
@@ -51,7 +48,7 @@ export default function BookACallPage() {
         </div>
 
         {/* Right — form */}
-        <div className="px-10 py-14" style={{ background: 'var(--bg-secondary)' }}>
+        <div className="px-5 sm:px-10 py-10 sm:py-14" style={{ background: 'var(--bg-secondary)' }}>
           <BookCallForm />
         </div>
       </div>

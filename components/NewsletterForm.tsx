@@ -46,18 +46,18 @@ export default function NewsletterForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex gap-[10px] mt-6">
+      <div className="flex flex-col sm:flex-row gap-[10px] mt-6">
         <input
           type="email"
           name="email"
           placeholder="your@email.com"
           required
-          className="flex-1 px-[14px] py-[11px] text-[14px] bg-white border-chalk-2 rounded-chalk outline-none"
+          className="flex-1 px-[14px] py-[13px] sm:py-[11px] text-[14px] bg-white border-chalk-2 rounded-chalk outline-none"
         />
         <button
           type="submit"
           disabled={loading}
-          className="px-[22px] py-[11px] bg-[var(--text)] text-white rounded-chalk text-[13px] font-medium whitespace-nowrap cursor-pointer disabled:opacity-60"
+          className="px-[22px] py-[13px] sm:py-[11px] bg-[var(--text)] text-white rounded-chalk text-[13px] font-medium whitespace-nowrap cursor-pointer disabled:opacity-60"
         >
           {loading ? '…' : 'Subscribe'}
         </button>

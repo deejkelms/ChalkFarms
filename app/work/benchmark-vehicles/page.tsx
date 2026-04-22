@@ -29,8 +29,9 @@ export default function BenchmarkVehiclesCaseStudy() {
   return (
     <article>
       {/* Header */}
-      <section className="px-8 pt-10 pb-8">
+      <section className="px-5 sm:px-8 pt-8 sm:pt-10 pb-6 sm:pb-8">
         <div
+          className="mb-5"
           style={{
             fontSize: '11px',
             letterSpacing: '0.12em',
@@ -39,17 +40,13 @@ export default function BenchmarkVehiclesCaseStudy() {
             display: 'flex',
             alignItems: 'center',
             gap: '12px',
-            marginBottom: '1.25rem',
           }}
         >
           <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--green)' }} />
           Case Study &nbsp;·&nbsp; Benchmark Vehicles
         </div>
 
-        <h1
-          className="font-display mb-6 max-w-[680px]"
-          style={{ fontSize: '2.75rem', lineHeight: '1.15' }}
-        >
+        <h1 className="font-display text-[2rem] sm:text-[2.75rem] leading-[1.15] mb-6 max-w-[680px]">
           Built from zero to{' '}
           <em className="italic text-[var(--text-secondary)]">demand they couldn't keep up with.</em>
         </h1>
@@ -74,7 +71,7 @@ export default function BenchmarkVehiclesCaseStudy() {
         </div>
 
         {/* Meta */}
-        <div className="grid grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-8">
           {[
             { label: 'Client', value: 'Benchmark Vehicles' },
             { label: 'Industry', value: 'Premium B2C / Adventure' },
@@ -91,13 +88,10 @@ export default function BenchmarkVehiclesCaseStudy() {
         </div>
 
         {/* Stats */}
-        <div
-          className="grid grid-cols-3 rounded-chalk-lg overflow-hidden border-chalk my-8"
-          style={{ gap: '1px', background: 'var(--border)' }}
-        >
-          {stats.map((s) => (
-            <div key={s.num} className="bg-white p-7">
-              <div className="font-display text-[2.75rem] leading-none mb-2">{s.num}</div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 grid-sep rounded-chalk-lg overflow-hidden border-chalk my-8">
+          {stats.map((s, i) => (
+            <div key={s.num} className={`bg-white p-5 sm:p-7 ${i < stats.length - 1 ? 'border-b-chalk sm:border-b-0' : ''}`}>
+              <div className="font-display text-[2rem] sm:text-[2.75rem] leading-none mb-2">{s.num}</div>
               <div className="text-[13px] text-[var(--text-secondary)] leading-[1.4]">{s.label}</div>
             </div>
           ))}
@@ -105,7 +99,7 @@ export default function BenchmarkVehiclesCaseStudy() {
       </section>
 
       {/* Body */}
-      <section className="px-8 pb-8">
+      <section className="px-5 sm:px-8 pb-8">
         <div className="text-[11px] tracking-[0.12em] uppercase text-[var(--text-secondary)] mt-8 mb-4">
           The situation
         </div>
@@ -119,7 +113,7 @@ export default function BenchmarkVehiclesCaseStudy() {
         <div className="text-[11px] tracking-[0.12em] uppercase text-[var(--text-secondary)] mt-8 mb-4">
           The approach
         </div>
-        <div className="grid grid-cols-2 gap-3 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
           {channels.map((ch) => (
             <div key={ch.name} className="rounded-chalk p-5" style={{ background: 'var(--bg-secondary)' }}>
               <div className="text-[13px] font-medium mb-[6px]">{ch.name}</div>
@@ -133,7 +127,7 @@ export default function BenchmarkVehiclesCaseStudy() {
         </div>
 
         {/* Mini stats */}
-        <div className="grid grid-cols-3 gap-3 my-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 my-6">
           {miniStats.map((s) => (
             <div key={s.num} className="rounded-chalk p-5" style={{ background: 'var(--bg-secondary)' }}>
               <div className="font-display text-[1.75rem] mb-1">{s.num}</div>
@@ -155,13 +149,13 @@ export default function BenchmarkVehiclesCaseStudy() {
         </div>
 
         {/* CTA */}
-        <div className="flex items-center justify-between border-chalk rounded-chalk-lg px-7 py-6 mt-12 flex-wrap gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-chalk rounded-chalk-lg px-5 sm:px-7 py-6 mt-12 gap-4">
           <div className="font-display text-[1.35rem]">
             Ready to build a pipeline your team can't keep up with?
           </div>
           <Link
             href="/book-a-call"
-            className="inline-block text-[13px] font-medium px-6 py-3 bg-[var(--text)] text-white rounded-chalk no-underline"
+            className="inline-block text-[13px] font-medium px-6 py-[13px] sm:py-3 bg-[var(--text)] text-white rounded-chalk no-underline"
           >
             Book a call
           </Link>
