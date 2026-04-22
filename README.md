@@ -130,5 +130,5 @@ components/
 
 ## Contact
 
-**Developer:** [your name] — [your email]  
-**Client:** Chalk Farms — [client email]
+**Developer:** Derek Kelmanson — dkelmanson@gmail.om 
+**Client:** Chalk Farms — mackenzieleahy@gmail.com
